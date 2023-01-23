@@ -22,6 +22,7 @@ import {
   IntervalInputs,
   FormError,
 } from "./styles";
+import { useRouter } from "next/router";
 
 const timeIntervalsFormSchema = z.object({
   intervals: z
@@ -86,6 +87,8 @@ export default function TimeIntervals() {
     },
   });
 
+  const router = useRouter();
+
   const weekDays = getWeekDays();
 
   const { fields } = useFieldArray({
@@ -96,11 +99,13 @@ export default function TimeIntervals() {
   const intervals = watch("intervals");
 
   async function handleSetTimeIntervals(data: any) {
-    const formData = data as TimeIntervalsFormOutput;
+    const { intervals } = data as TimeIntervalsFormOutput;
 
     await api.post("/users/time-intervals", {
       intervals,
     });
+
+    await router.push("/register/update-profile");
   }
 
   return (
