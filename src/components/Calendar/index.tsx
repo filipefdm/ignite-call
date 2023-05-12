@@ -67,7 +67,7 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
       String(currentDate.get("month") + 1).padStart(2, "0"),
     ],
     async () => {
-      const response = await api.get(`/users/${username}/blocked-dates`, {
+      const response = await api.get(`/users/${username}/blocked-dates/`, {
         params: {
           year: currentDate.get("year"),
           month: String(currentDate.get("month") + 1).padStart(2, "0"),
