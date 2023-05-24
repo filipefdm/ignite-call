@@ -10,6 +10,8 @@ export default async function handler(
     return res.status(405).end();
   }
 
+  console.log(req.method);
+
   const { name, username } = req.body;
 
   const userExists = await prisma.user.findUnique({
